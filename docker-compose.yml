@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - API_URL=http://fastapi:8000
+
+  gradio:
+    build:
+      context: .
+      dockerfile: Dockerfile.gradio
+    ports:
+      - "7860:7860"
+    volumes:
+      - .:/app
+    environment:
+      - API_URL=http://fastapi:8000
