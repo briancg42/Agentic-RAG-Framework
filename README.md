@@ -2,15 +2,15 @@
 
 ## Overview
 
-The **Agentic-RAG-Framework** is a comprehensive platform designed to handle file management and facilitate the creation of marketing assets using AI-driven workflows. By leveraging retrieval-augmented generation (RAG) and AI agents, the framework aims to automate and enhance marketing strategies, providing users with tailored copywriting solutions and frameworks.
+The **Agentic-RAG-Framework** is a platform designed to automate and enhance marketing strategies using AI-driven workflows. It leverages retrieval-augmented generation (RAG) and AI agents to streamline the creation of marketing assets and frameworks.
 
 ## Features
 
-- **File Upload System**: Efficiently manage and process a variety of file types to support marketing and copywriting tasks.
-- **Generative AI Integration**: Use advanced AI models to generate marketing assets and copywriting content.
-- **Custom Frameworks for Marketing**: Implement specialized frameworks for marketing strategies, such as the Basic Marketing Essentials Framework.
-- **RAG Workflows**: Integrate RAG techniques to enhance content generation and retrieval processes.
-- **Langchain AI Agents**: Utilize Langchain AI agents to automate and streamline marketing processes.
+- **File Management System**: Efficiently handle and process various file types.
+- **AI Integration**: Use AI models for generating marketing content.
+- **Marketing Frameworks**: Implement frameworks like the Basic Marketing Essentials.
+- **RAG Workflows**: Integrate retrieval-augmented generation techniques.
+- **Langchain AI Agents**: Automate processes with AI agents.
 
 ## Getting Started
 
@@ -21,6 +21,7 @@ Ensure you have the following installed:
 - Python 3.8+
 - Docker
 - Docker Compose
+- PostgreSQL (for deploying on Render or similar platforms)
 
 ### Installation
 
@@ -37,7 +38,12 @@ Ensure you have the following installed:
    pip install -r requirements.txt
    ```
 
-3. **Run Locally**:
+3. **Set Up the Database**:
+
+   - **PostgreSQL with pgvector**: Use a PostgreSQL database to store structured data, such as marketing frameworks and client information. Make sure to add the `pgvector` extension for vector storage.
+   - **Environment Variables**: Configure your database connection using environment variables.
+
+4. **Run Locally**:
 
    - **Using Docker**:
 
@@ -62,33 +68,28 @@ Ensure you have the following installed:
 ## Project Structure
 
 - **`app.py`**: Main application file.
-- **`docker-compose.yml`**: Docker Compose configuration for orchestrating the services.
+- **`docker-compose.yml`**: Docker Compose configuration for orchestrating services and setting up Docker volumes.
 - **`main.py`**: FastAPI application.
 - **`gradio_app.py`**: Gradio interface for user interaction.
-- **`uploads/`**: Directory containing uploaded files and assets.
+- **`uploads/`**: Directory for temporary file storage, consider using a Docker volume for persistent storage.
 
-## Framework Templates
+## Database Setup
 
-### Basic Marketing Essentials
+Consider using PostgreSQL with the `pgvector` extension for storing and managing structured data:
 
-The `Basic Marketing Essentials` framework provides a structured approach to creating marketing offers. It includes elements such as:
+- **Set up PostgreSQL**: Install PostgreSQL and create a database for your application.
+- **Add pgvector extension**: Install the `pgvector` extension to handle vector operations.
+- **Configure Connection**: Use environment variables to manage your database connection securely.
 
-- Offer Description
-- Target Audience
-- Key Features
-- Emotional Benefits
+## Deployment
 
-Detailed information can be found in `uploads/initial/Basic_Marketing_Essentials_Basic.txt`.
+### Render Deployment
 
-### Sample Client Assets
+1. **Prepare Docker Images**: Ensure your Docker images are optimized for deployment.
 
-The `Sample Client Assets` document outlines the use of the Basic Marketing Essentials framework to generate marketing offers. It includes components like:
+2. **Set Up Render**: Follow Render's documentation to deploy your Docker-based application. Use Docker volumes to manage persistent data storage.
 
-- Overview of Fundability System
-- Key Features
-- Target Audience
-
-See `uploads/test/Sample_Client_Assets_for_Upload.txt` for more details.
+3. **Environment Configuration**: Use Render's environment variable settings to configure your database and application settings.
 
 ## Contributions
 
@@ -101,15 +102,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For further information or questions, please contact the repository owner at briancg.lab@gmail.com.
-
 ```
 
-### Explanation
+### Key Considerations
 
-- **Overview**: This section provides a brief description of the project's goals and key features.
-- **Installation**: Instructions are provided for setting up the project locally, both with and without Docker.
-- **Project Structure**: A summary of the key files and directories in your project.
-- **Framework Templates**: Description of the frameworks and assets included in your project, based on the uploaded text files.
-- **Contributions and License**: Basic information on contributing to the project and the licensing terms.
-
-Feel free to adjust the content as needed to better fit your specific project details or goals. If you have any questions or need further modifications, let me know!
+- **Database Use**: The README recommends using PostgreSQL with the `pgvector` extension for structured data storage, which is more scalable and efficient than flat file storage for complex applications.
+- **Docker Volumes**: Suggests using Docker volumes for managing file storage separately from the application code. This is especially useful for deployment on platforms like Render, where you want to persist data independently of your application containers.
+- **Environment Variables**: Emphasizes the use of environment variables for managing sensitive information like database credentials.
